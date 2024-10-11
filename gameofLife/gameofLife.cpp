@@ -22,6 +22,7 @@ void makeGrid(int GRID_SIZE, int STARTING_CELL_AMOUNT)
     
     // Print the grid
     for (int i = 0; i < rows; ++i) {
+        cout << ".";
         for (int j = 0; j < columns; ++j) {
             cout << array[i][j] << ".";
         }
