@@ -4,23 +4,26 @@ using namespace std;
 
 void makeGrid(int GRID_SIZE, int STARTING_CELL_AMOUNT)
 {
+    int rows = GRID_SIZE;
+    int columns = GRID_SIZE;
+
     // Create necessary memory
-    char** array = new char* [GRID_SIZE]; 
-    for (int i = 0; i < GRID_SIZE; ++i) {
-        array[i] = new char[GRID_SIZE]; 
+    char** array = new char* [rows]; 
+    for (int i = 0; i < rows; ++i) {
+        array[i] = new char[columns]; 
     }
     
     // Create the actual grid
-    for (int i = 0; i < GRID_SIZE; ++i) {
-        for (int j = 0; j < GRID_SIZE; ++j) {
-            array[i][j] = '.'; 
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            array[i][j] = ' '; 
         }
     }
     
     // Print the grid
-    for (int i = 0; i < GRID_SIZE; ++i) {
-        for (int j = 0; j < GRID_SIZE; ++j) {
-            cout << array[i][j] << " ";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            cout << array[i][j] << ".";
         }
         cout << endl; 
     }
