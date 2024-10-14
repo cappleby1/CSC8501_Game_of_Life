@@ -6,21 +6,21 @@ using namespace std;
 int STARTING_CELL_AMOUNT, GAME_TIME, ROWS, COLUMNS;
 
 class Cell {
-    bool isAlive = false;
+    bool is_alive = false;
 
 public:
-    Cell(bool state = false) : isAlive(state) {}
+    Cell(bool state = false) : is_alive(state) {}
 
     // Set state
     void setAlive(bool state)
     {
-        isAlive = state;
+        is_alive = state;
     }
     
     // Check current state
     bool isAliveState()
     {
-        return isAlive;
+        return is_alive;
     }
 };
 class Grid
