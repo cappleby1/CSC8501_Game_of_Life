@@ -72,7 +72,6 @@ public:
 
     void printGrid()
     {
-        cout << "\n" << "Game Baord: " << "\n";
         for (int i = 0; i < rows; i++) 
         {
             cout << ".";
@@ -82,6 +81,51 @@ public:
             }
             cout << endl; 
         }
+    }
+    void updateGrid() {
+        Cell** newBoard = new Cell * [rows];
+        for (int i = 0; i < rows; i++) {
+            newBoard[i] = new Cell[columns];
+        }
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+
+                // Totals amount of live neighbours
+                int aliveNeighbors = countAliveNeighbors(i, j);
+
+                // Checks if the alive conditions are met
+                if (board[i][j].isAliveState()) {
+                    newBoard[i][j].setAlive(aliveNeighbors == 2 || aliveNeighbors == 3);
+                }
+                else {
+                    newBoard[i][j].setAlive(aliveNeighbors == 3);
+                }
+            }
+        }
+
+        // Update board
+        for (int i = 0; i < rows; i++) {
+            delete[] board[i];
+            board[i] = newBoard[i];
+        }
+        delete[] newBoard;
+    }
+
+private:
+    int countAliveNeighbors(int x, int y) {
+        int count = 0;
+        for (int i = -1; i <= 1; ++i) {
+            for (int j = -1; j <= 1; ++j) {
+                if (i == 0 && j == 0) continue; // Skip the cell itself
+                int ni = x + i, nj = y + j;
+                // Check bounds and alive state in a single line
+                if (ni >= 0 && ni < rows && nj >= 0 && nj < columns && board[ni][nj].isAliveState()) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 };
 
@@ -102,7 +146,14 @@ int main()
 
     Grid game_board(ROWS, COLUMNS);
     game_board.randomiseAliveCells();
+    cout << "\n" << "Initial Board: " << "\n";
     game_board.printGrid();
+
+    for (int i = 0; i < GAME_TIME; ++i) {
+        cout << "\n Turn " << (i + 1) << ":\n";
+        game_board.updateGrid();
+        game_board.printGrid();
+    }
     
 
     return 0;
