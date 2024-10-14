@@ -11,11 +11,13 @@ class Cell {
 public:
     Cell(bool state = false) : isAlive(state) {}
 
+    // Set state
     void setAlive(bool state)
     {
         isAlive = state;
     }
-
+    
+    // Check current state
     bool isAliveState()
     {
         return isAlive;
@@ -30,6 +32,7 @@ class Grid
 public:
     Grid(int ROWS, int COLUMNS)
     {
+        // Grid setup
         rows = ROWS;
         columns = COLUMNS;
 
@@ -42,7 +45,7 @@ public:
 
     ~Grid()
     {
-        // Deallocate memory for the board
+        // Deallocate memory
         for (int i = 0; i < rows; i++) {
             delete[] board[i];
         }
@@ -51,7 +54,8 @@ public:
 
     void randomiseAliveCells()
     {
-        srand(time(0)); // Use time to have a dynamic seed
+        // Use time to have a dynamic seed
+        srand(time(0)); 
         for (int n = 0; n < STARTING_CELL_AMOUNT; ++n) {
             int randomRow = rand() % rows;
             int randomCol = rand() % columns;
