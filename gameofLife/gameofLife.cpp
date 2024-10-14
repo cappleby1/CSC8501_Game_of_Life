@@ -57,16 +57,16 @@ public:
         // Use time to have a dynamic seed
         srand(time(0)); 
         for (int n = 0; n < STARTING_CELL_AMOUNT; ++n) {
-            int randomRow = rand() % rows;
-            int randomCol = rand() % columns;
+            int random_row = rand() % rows;
+            int random_col = rand() % columns;
 
             // Ensure  don't overwrite an existing 'O'
-            while (board[randomRow][randomCol].isAliveState()) {
-                randomRow = rand() % rows;
-                randomCol = rand() % columns;
+            while (board[random_row][random_col].isAliveState()) {
+                random_row = rand() % rows;
+                random_col = rand() % columns;
             }
 
-            board[randomRow][randomCol].setAlive(true);
+            board[random_row][random_col].setAlive(true);
         }
     }
 
