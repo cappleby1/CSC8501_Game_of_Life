@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+gameofLife/gameofLife
+.vscode/launch.json
+.vscode/tasks.json
+gameofLife/gameofLife.dSYM/Contents/Resources/DWARF/gameofLife
+gameofLife/gameofLife.dSYM/Contents/Info.plist
+gameofLife/gameofLife.dSYM/Contents/Resources/Relocations/aarch64/gameofLife.yml

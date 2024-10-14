@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="gameofLife.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="save_data.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
