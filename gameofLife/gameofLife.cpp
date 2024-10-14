@@ -22,6 +22,12 @@ public:
     {
         return is_alive;
     }
+    
+    // Overrides operator to allow the state of the cell to be written in the CSV (converting it to 0/1)
+    friend ostream& operator<<(ostream& os, Cell& cell) {
+        os << cell.is_alive; 
+        return os;
+    }
 };
 class Grid
 {
@@ -116,6 +122,30 @@ public:
         delete[] newBoard;
     }
 
+    void saveGameToCSV()
+    {
+        ofstream file("save_data.csv");
+
+        if(!file)
+        {
+            cout << "Error no file found";
+            return;
+        }
+
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0; j < columns; j++)
+            {
+                file << board[i][j];
+                if (j < columns - 1) {
+                    file << ","; // Add comma between values
+                }
+            }
+            file << "\n";
+        }
+        file.close();
+    }
+
 private:
     int countAliveNeighbors(int x, int y) {
         int count = 0;
@@ -160,6 +190,9 @@ int main()
         game_board.updateGrid();
         game_board.printGrid();
     }
+
+
+    game_board.saveGameToCSV();
     
 
     return 0;
