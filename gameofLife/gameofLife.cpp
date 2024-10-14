@@ -83,6 +83,8 @@ public:
         }
     }
     void updateGrid() {
+
+        // Will be used to override old board
         Cell** newBoard = new Cell * [rows];
         for (int i = 0; i < rows; i++) {
             newBoard[i] = new Cell[columns];
@@ -94,11 +96,13 @@ public:
                 // Totals amount of live neighbours
                 int aliveNeighbors = countAliveNeighbors(i, j);
 
-                // Checks if the alive conditions are met
+                // Checks if the current cell is alive or dead
                 if (board[i][j].isAliveState()) {
+                    // Cell will be alive for next gen if it has 2 or 3 alive neighbours
                     newBoard[i][j].setAlive(aliveNeighbors == 2 || aliveNeighbors == 3);
                 }
                 else {
+                    // Cell will come alive next gen if it has 3 alive neighburs
                     newBoard[i][j].setAlive(aliveNeighbors == 3);
                 }
             }
