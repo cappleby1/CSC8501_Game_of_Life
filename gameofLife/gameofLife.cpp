@@ -34,18 +34,27 @@ public:
             board = new Cell* [columns];
         }
     }
-};
 
+    // Change some random position to "O"
+    srand(time(0)); // Use time to have a dynamic seed
+    for (int n = 0; n < STARTING_CELL_AMOUNT; ++n) {
+        int randomRow = rand() % rows;
+        int randomCol = rand() % columns;
 
-void saveGame()
-{
-    cout << "Saving game";
-    ofstream my_file("save_data.csv");
+        // Ensure  don't overwrite an existing 'O'
+        while (array[randomRow][randomCol] == 'O') {
+            randomRow = rand() % rows;
+            randomCol = rand() % columns;
+        }
 
-    for (int i = 0; i < ROWS; ++i) {
-        for (int j = 0; j < COLUMNS; ++j) {
-            cin >> CURRENT_GRID[i][j];
-            my_file << "." << CURRENT_GRID[i][j] << ",";
+        array[randomRow][randomCol] = 'O'; 
+    }
+    
+    // Print the grid
+    for (int i = 0; i < rows; ++i) {
+        cout << "."; // Used to make the begining corner
+        for (int j = 0; j < columns; ++j) {
+            cout << array[i][j] << ".";
         }
     }
     my_file.close();
