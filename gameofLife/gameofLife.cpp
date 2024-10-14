@@ -3,19 +3,24 @@
 
 using namespace std;
 
-int GRID_SIZE, STARTING_CELL_AMOUNT, GAME_TIME, ROWS, COLUMNS;
+int STARTING_CELL_AMOUNT, GAME_TIME, ROWS, COLUMNS;
 
-class Cell
-{
-    bool isAlive;
+class Cell {
+    bool isAlive = false;
 
 public:
-    Cell()
+    Cell(bool state = false) : isAlive(state) {}
+
+    void setAlive(bool state)
     {
-        isAlive = false;
+        isAlive = state;
+    }
+
+    bool isAliveState()
+    {
+        return isAlive;
     }
 };
-
 class Grid
 {
     Cell** board;
@@ -28,38 +33,53 @@ public:
         rows = ROWS;
         columns = COLUMNS;
 
-        board = new Cell* [rows];
-        for (int i = 0; i < rows; i++)
+        board = new Cell * [rows];
+        for (int i = 0; i < rows; i++) 
         {
-            board = new Cell* [columns];
+            board[i] = new Cell[columns]; 
         }
     }
 
-    // Change some random position to "O"
-    srand(time(0)); // Use time to have a dynamic seed
-    for (int n = 0; n < STARTING_CELL_AMOUNT; ++n) {
-        int randomRow = rand() % rows;
-        int randomCol = rand() % columns;
-
-        // Ensure  don't overwrite an existing 'O'
-        while (array[randomRow][randomCol] == 'O') {
-            randomRow = rand() % rows;
-            randomCol = rand() % columns;
+    ~Grid()
+    {
+        // Deallocate memory for the board
+        for (int i = 0; i < rows; i++) {
+            delete[] board[i];
         }
-
-        array[randomRow][randomCol] = 'O'; 
+        delete[] board;
     }
-    
-    // Print the grid
-    for (int i = 0; i < rows; ++i) {
-        cout << "."; // Used to make the begining corner
-        for (int j = 0; j < columns; ++j) {
-            cout << array[i][j] << ".";
+
+    void randomiseAliveCells()
+    {
+        srand(time(0)); // Use time to have a dynamic seed
+        for (int n = 0; n < STARTING_CELL_AMOUNT; ++n) {
+            int randomRow = rand() % rows;
+            int randomCol = rand() % columns;
+
+            // Ensure  don't overwrite an existing 'O'
+            while (board[randomRow][randomCol].isAliveState()) {
+                randomRow = rand() % rows;
+                randomCol = rand() % columns;
+            }
+
+            board[randomRow][randomCol].setAlive(true);
         }
     }
-    my_file.close();
-    cout << "File saved";
-}
+
+    void printGrid()
+    {
+        cout << "\n" << "Game Baord: " << "\n";
+        for (int i = 0; i < rows; i++) 
+        {
+            cout << ".";
+            for (int j = 0; j < columns; j++) 
+            {
+                cout << (board[i][j].isAliveState() ? 'O' : ' ') << ".";
+            }
+            cout << endl; 
+        }
+    }
+};
 
 
 int main()
@@ -67,7 +87,7 @@ int main()
     cout << "Enter amount of rows: " << "\n";
     cin >> ROWS;
     
-    cout << "Enter amount of height: " << "\n";
+    cout << "Enter amount of columns: " << "\n";
     cin >> COLUMNS;
 
     cout << "Enter amount of starting cells: " << "\n";
@@ -77,6 +97,8 @@ int main()
     cin >> GAME_TIME;
 
     Grid game_board(ROWS, COLUMNS);
+    game_board.randomiseAliveCells();
+    game_board.printGrid();
     
 
     return 0;
