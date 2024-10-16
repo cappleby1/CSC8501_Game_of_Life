@@ -18,16 +18,8 @@
     <ClCompile Include="gameofLife.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="question2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="save_data.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
