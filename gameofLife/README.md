@@ -1,0 +1,1 @@
+Main file to run is "gameofLife.cpp"
