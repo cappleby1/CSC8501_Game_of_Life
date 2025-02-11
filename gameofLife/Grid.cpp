@@ -2,27 +2,34 @@
 
 using namespace std;
 
+int Grid::countAliveNeighbours(int x, int y, int rows, int columns) {
+    int count = 0;
 
-Grid::Grid(int ROWS, int COLUMNS)
-{
-    // Grid setup
-    rows = ROWS;
-    columns = COLUMNS;
-
-    board = new Cell * [rows];
-    for (int i = 0; i < rows; i++)
-    {
-        board[i] = new Cell[columns];
+    // Checks all surrounding cells for alive neighbours
+    for (int i = -1; i <= 1; ++i) {
+        for (int j = -1; j <= 1; ++j) {
+            if (i == 0 && j == 0) continue; // Skip the cell itself
+            int ni = x + i, nj = y + j;
+            // Check bounds and alive state in a single line
+            if (ni >= 0 && ni < rows && nj >= 0 && nj < columns && board[ni][nj].isAliveState()) {
+                count++;
+            }
+        }
     }
+    return count;
 }
 
-~Grid()
+bool Grid::areAllCellsDead(int rows, int columns)
 {
-    // Deallocate memory
-    for (int i = 0; i < rows; i++) {
-        delete[] board[i];
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            if (board[i][j].isAliveState()) {
+                // Found a live cell
+                return false;
+            }
+        }
     }
-    delete[] board;
+    return true;
 }
 
 void Grid::randomiseAliveCells(int STARTING_CELL_AMOUNT)
@@ -67,7 +74,7 @@ void Grid::updateGrid() {
         for (int j = 0; j < columns; j++) {
 
             // Totals amount of live neighbours
-            int aliveNeighbors = countAliveNeighbors(i, j);
+            int aliveNeighbors = countAliveNeighbours(i, j, rows, columns);
 
             // Checks if the current cell is alive or dead
             if (board[i][j].isAliveState()) 
@@ -89,4 +96,26 @@ void Grid::updateGrid() {
         board[i] = newBoard[i];
     }
     delete[] newBoard;
+}
+
+Grid::Grid(int ROWS, int COLUMNS)
+{
+    // Grid setup
+    rows = ROWS;
+    columns = COLUMNS;
+
+    board = new Cell * [rows];
+    for (int i = 0; i < rows; i++)
+    {
+        board[i] = new Cell[columns];
+    }
+}
+
+Grid::~Grid()
+{
+    // Deallocate memory
+    for (int i = 0; i < rows; i++) {
+        delete[] board[i];
+    }
+    delete[] board;
 }

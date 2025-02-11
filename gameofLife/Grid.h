@@ -1,10 +1,9 @@
 #include "Cell.h"
-
 using namespace std;
 
 class Grid {
 public:
-    Grid** board;
+    Cell** board;
     int rows;
     int columns;
 
@@ -12,4 +11,6 @@ public:
     void randomiseAliveCells(int STARTING_CELL_AMOUNT);
     void printGrid();
     void updateGrid();
+    int countAliveNeighbours(int x, int y, int rows, int columns);
+    bool areAllCellsDead(int rows, int columns);
 };
