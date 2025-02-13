@@ -50,14 +50,14 @@ void Grid::loadGameFromCSV(int ROWS, Grid game_board)
     }
 }
 
-int Grid::countAliveNeighbours(int x, int y) {
+int Grid::countAliveNeighbours() {
     int count = 0;
 
     // Checks all surrounding cells for alive neighbours
     for (int i = -1; i <= 1; ++i) {
         for (int j = -1; j <= 1; ++j) {
             if (i == 0 && j == 0) continue; // Skip the cell itself
-            int ni = x + i, nj = y + j;
+            int ni = rows + i, nj = columns + j;
             // Check bounds and alive state in a single line
             if (ni >= 0 && ni < rows && nj >= 0 && nj < columns && board[ni][nj].isAliveState()) {
                 count++;
@@ -122,7 +122,7 @@ void Grid::updateGrid() {
         for (int j = 0; j < columns; j++) {
 
             // Totals amount of live neighbours
-            int aliveNeighbors = countAliveNeighbours(i, j, rows, columns);
+            int aliveNeighbors = countAliveNeighbours();
 
             // Checks if the current cell is alive or dead
             if (board[i][j].isAliveState()) 
