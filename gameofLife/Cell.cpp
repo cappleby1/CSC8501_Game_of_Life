@@ -27,7 +27,7 @@ bool Grid::areAllCellsDead(int rows, int columns)
     return true;
 }
 
-bool Grid::checkForBlock(int rows, int columns, Grid board)
+bool Grid::checkForBlock()
 {
     // Check for each possible 2x2 grid
     for (int i = 0; i < rows - 3; ++i)
@@ -67,7 +67,7 @@ bool Grid::checkForBlock(int rows, int columns, Grid board)
     return false;
 }
 
-bool Grid::checkForBeehive(int rows, int columns, Grid board)
+bool Grid::checkForBeehive()
 {
     for (int i = 0; i < rows - 5; ++i)
     {
@@ -121,7 +121,7 @@ bool Grid::checkForBeehive(int rows, int columns, Grid board)
 
 }
 
-bool Grid::checkForBlinker(int rows, int columns, Grid board)
+bool Grid::checkForBlinker()
 {
 
     // Vertical Orientation
@@ -189,7 +189,7 @@ bool Grid::checkForBlinker(int rows, int columns, Grid board)
     return false; // No blinker found
 }
 
-bool Grid::checkForToad(int rows, int columns, Grid board)
+bool Grid::checkForToad()
 {
     for (int x = 0; x < rows - 3; x++)
     {
@@ -295,7 +295,7 @@ bool Grid::checkForToad(int rows, int columns, Grid board)
     return false;
 }
 
-bool Grid::checkForGlider(int rows, int columns, Grid board)
+bool Grid::checkForGlider()
 {
     for (int x = 0; x < rows - 4; x++)
     {
@@ -386,7 +386,7 @@ bool Grid::checkForGlider(int rows, int columns, Grid board)
     return false;
 }
 
-bool Grid::checkForShip(int rows, int columns, Grid board)
+bool Grid::checkForShip()
 {
     for (int x = 0; x < rows - 6; x++)
     {

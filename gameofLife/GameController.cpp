@@ -22,7 +22,7 @@ void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOU
     cout << "\n" << "Initial Board: " << "\n";
     game_board.printGrid();
 
-    game_board.saveGameToCSV();
+    game_board.saveGameToCSV(ROWS, COLUMNS);
 
     int menu_option_2;
     cout << "What question would you like to run?" << ":\n";
@@ -175,7 +175,7 @@ void GameController::question4(Grid game_board, int CURRENT_TURN)
 
         if (game_board.checkForGlider())
         {
-            game_board.saveGameToCSV();
+            game_board.saveGameToCSV(ROWS,COLUMNS);
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "glider found" << ":\n";
             game_board.printGrid();
@@ -184,7 +184,7 @@ void GameController::question4(Grid game_board, int CURRENT_TURN)
 
         if (game_board.checkForShip())
         {
-            game_board.saveGameToCSV();
+            game_board.saveGameToCSV(ROWS, COLUMNS);
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "ship found" << ":\n";
             game_board.printGrid();
@@ -223,4 +223,9 @@ void GameController::question5(int ROWS, int COLUMNS, int STARTING_CELL_AMOUNT)
         int ern = calculateERN(patterns[i], ROWS, COLUMNS, STARTING_CELL_AMOUNT);
         cout << patterns[i].name << ": " << ern << "\n";
     }
+}
+
+GameController::GameController(int rows, int columns, int starting_cell, int game_time, int current_turn)
+{
+    createNewGame(rows, columns, starting_cell, game_time, current_turn);
 }

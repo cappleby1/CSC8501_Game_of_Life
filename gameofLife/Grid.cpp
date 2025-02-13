@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void Grid::saveGameToCSV(int rows, int columns)
+void Grid::saveGameToCSV()
 {
     ofstream file("save_data.csv");
 
@@ -28,7 +28,29 @@ void Grid::saveGameToCSV(int rows, int columns)
     file.close();
 }
 
-int Grid::countAliveNeighbours(int x, int y, int rows, int columns) {
+void Grid::loadGameFromCSV(int ROWS, Grid game_board)
+{
+    ifstream file("save_data.csv");
+    string line;
+    int currentRow = 0;
+
+    while (getline(file, line) && currentRow < ROWS) {
+        stringstream ss(line);
+        string value;
+        int currentColumn = 0;
+
+        // Read values into the grid and set active cells
+        while (getline(ss, value, ',')) {
+            if (value == "1") {
+                game_board.board[currentRow][currentColumn].setAlive(true); // Set cell to active
+            }
+            currentColumn++;
+        }
+        currentRow++;
+    }
+}
+
+int Grid::countAliveNeighbours(int x, int y) {
     int count = 0;
 
     // Checks all surrounding cells for alive neighbours
@@ -45,7 +67,7 @@ int Grid::countAliveNeighbours(int x, int y, int rows, int columns) {
     return count;
 }
 
-bool Grid::areAllCellsDead(int rows, int columns)
+bool Grid::areAllCellsDead()
 {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
@@ -137,7 +159,7 @@ Grid::Grid(int ROWS, int COLUMNS)
     }
 }
 
-Grid::~Grid()
+Grid::~Grid() 
 {
     // Deallocate memory
     for (int i = 0; i < rows; i++) {
