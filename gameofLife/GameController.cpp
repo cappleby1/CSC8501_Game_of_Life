@@ -17,12 +17,12 @@ void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOU
     cout << "Enter amount of turns: " << "\n";
     cin >> GAME_TIME;
 
-    Grid board(ROWS, COLUMNS);
-    board.randomiseAliveCells(STARTING_CELL_AMOUNT);
+    board = new Grid(ROWS, COLUMNS);
+    board->randomiseAliveCells(STARTING_CELL_AMOUNT);
     cout << "\n" << "Initial Board: " << "\n";
-    board.printGrid();
+    board->printGrid();
 
-    board.saveGameToCSV();
+    board->saveGameToCSV();
 
     int menu_option_2;
     cout << "What question would you like to run?" << ":\n";
@@ -60,15 +60,15 @@ void GameController::question1()
     for (int i = 0; i < GAME_TIME; ++i)
     {
         cout << "\n Turn " << (i + 1) << ":\n";
-        board.updateGrid();
-        board.printGrid();
+        board->updateGrid();
+        board->printGrid();
 
         int save_option;
         cout << "Save board & pause? 1. Yes 2. No" << "\n";
         cin >> save_option;
         if (save_option == 1)
         {
-            board.saveGameToCSV();
+            board->saveGameToCSV();
             break;
         }
         else
@@ -86,7 +86,7 @@ void GameController::question2()
     while (!found)
     {
 
-        if (board.areAllCellsDead())
+        if (board->areAllCellsDead())
         {
             cout << "\n" << "All cells dead";
             break;
@@ -94,24 +94,24 @@ void GameController::question2()
 
         CURRENT_TURN += 1;
         cout << "\n Turn " << CURRENT_TURN << ":\n";
-        board.updateGrid();
-        board.printGrid();
+        board->updateGrid();
+        board->printGrid();
 
-        if (board.checkForBlock())
+        if (board->checkForBlock())
         {
-            board.saveGameToCSV();
+            board->saveGameToCSV();
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "2x2 found" << ":\n";
-            board.printGrid();
+            board->printGrid();
             break;
         }
 
-        if (board.checkForBeehive())
+        if (board->checkForBeehive())
         {
-            board.saveGameToCSV();
+            board->saveGameToCSV();
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "beehive found" << ":\n";
-            board.printGrid();
+            board->printGrid();
             break;
         }
     }
@@ -124,7 +124,7 @@ void GameController::question3()
     while (!found)
     {
 
-        if (board.areAllCellsDead())
+        if (board->areAllCellsDead())
         {
             cout << "\n" << "All cells dead";
             break;
@@ -132,24 +132,24 @@ void GameController::question3()
 
         CURRENT_TURN += 1;
         cout << "\n Turn " << CURRENT_TURN << ":\n";
-        board.updateGrid();
-        board.printGrid();
+        board->updateGrid();
+        board->printGrid();
 
-        if (board.checkForBlinker())
+        if (board->checkForBlinker())
         {
-            board.saveGameToCSV();
+            board->saveGameToCSV();
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "blinker found" << ":\n";
-            board.printGrid();
+            board->printGrid();
             break;
         }
 
-        if (board.checkForToad())
+        if (board->checkForToad())
         {
-            board.saveGameToCSV();
+            board->saveGameToCSV();
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "toad found" << ":\n";
-            board.printGrid();
+            board->printGrid();
             break;
         }
     }
@@ -162,7 +162,7 @@ void GameController::question4()
     while (!found)
     {
 
-        if (board.areAllCellsDead())
+        if (board->areAllCellsDead())
         {
             cout << "\n" << "All cells dead";
             break;
@@ -170,24 +170,24 @@ void GameController::question4()
 
         CURRENT_TURN += 1;
         cout << "\n Turn " << CURRENT_TURN << ":\n";
-        board.updateGrid();
-        board.printGrid();
+        board->updateGrid();
+        board->printGrid();
 
-        if (board.checkForGlider())
+        if (board->checkForGlider())
         {
-            board.saveGameToCSV(ROWS,COLUMNS);
+            board->saveGameToCSV();
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "glider found" << ":\n";
-            board.printGrid();
+            board->printGrid();
             break;
         }
 
-        if (board.checkForShip())
+        if (board->checkForShip())
         {
-            board.saveGameToCSV(ROWS, COLUMNS);
+            board->saveGameToCSV();
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "ship found" << ":\n";
-            board.printGrid();
+            board->printGrid();
             break;
         }
     }
