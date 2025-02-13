@@ -12,6 +12,7 @@ public:
     bool isAliveState();
 
 
+
     // Overrides operator to allow the state of the cell to be written in the CSV (converting it to 0/1)
     friend ostream& operator<<(ostream& os, Cell& cell)
     {
@@ -27,4 +28,11 @@ public:
         return is;
     }
 
+};
+
+struct Pattern {
+    const char* name;
+    int width;
+    int height;
+    int aliveCells;
 };

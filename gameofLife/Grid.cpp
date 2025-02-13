@@ -1,6 +1,32 @@
 #include "Grid.h"
+#include <sstream>
+#include <fstream>
 
 using namespace std;
+
+void Grid::saveGameToCSV(int rows, int columns)
+{
+    ofstream file("save_data.csv");
+
+    if (!file)
+    {
+        cout << "Error no file found";
+        return;
+    }
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            file << board[i][j];
+            if (j < columns - 1) {
+                file << ","; // Add comma between values
+            }
+        }
+        file << "\n";
+    }
+    file.close();
+}
 
 int Grid::countAliveNeighbours(int x, int y, int rows, int columns) {
     int count = 0;
