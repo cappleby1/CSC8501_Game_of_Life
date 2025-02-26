@@ -30,7 +30,7 @@ void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOU
 void GameController::menu(int GAME_TIME)
 {
     int menu_option_2;
-    cout << "What question would you like to run?" << ":\n";
+    cout << "What would you like to do? \n 1.Run for set amount of turns \n 2.Check for block \n 3.Check for beehive \n 4.Check for blink \n 5.Check for toad \n 6.Check for glider \n 7.Check for ship \n ";
     cin >> menu_option_2;
 
     switch (menu_option_2)
@@ -86,13 +86,14 @@ void GameController::question2()
         }
 
         CURRENT_TURN += 1;
+        system("cls");
         cout << "\n Turn " << CURRENT_TURN << ":\n";
         board->updateGrid();
         board->printGrid();
 
         if (board->checkForBlock())
         {
-            board->saveGameToCSV();
+            system("cls");
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "2x2 found" << ":\n";
             board->printGrid();
@@ -101,7 +102,7 @@ void GameController::question2()
 
         if (board->checkForBeehive())
         {
-            board->saveGameToCSV();
+            system("cls");
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "beehive found" << ":\n";
             board->printGrid();
@@ -124,6 +125,7 @@ void GameController::question3()
         }
 
         CURRENT_TURN += 1;
+        system("cls");
         cout << "\n Turn " << CURRENT_TURN << ":\n";
         board->updateGrid();
         board->printGrid();
@@ -131,6 +133,7 @@ void GameController::question3()
         if (board->checkForBlinker())
         {
             board->saveGameToCSV();
+            system("cls");
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "blinker found" << ":\n";
             board->printGrid();
@@ -140,6 +143,7 @@ void GameController::question3()
         if (board->checkForToad())
         {
             board->saveGameToCSV();
+            system("cls");
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "toad found" << ":\n";
             board->printGrid();
@@ -162,6 +166,7 @@ void GameController::question4()
         }
 
         CURRENT_TURN += 1;
+        system("cls");
         cout << "\n Turn " << CURRENT_TURN << ":\n";
         board->updateGrid();
         board->printGrid();
@@ -169,6 +174,7 @@ void GameController::question4()
         if (board->checkForGlider())
         {
             board->saveGameToCSV();
+            system("cls");
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "glider found" << ":\n";
             board->printGrid();
@@ -178,6 +184,7 @@ void GameController::question4()
         if (board->checkForShip())
         {
             board->saveGameToCSV();
+            system("cls");
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "ship found" << ":\n";
             board->printGrid();
