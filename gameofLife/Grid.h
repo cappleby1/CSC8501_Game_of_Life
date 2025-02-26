@@ -10,7 +10,7 @@ public:
     int rows;
     int columns;
 
-    Grid(int ROWS, int COLUMNS);
+    Grid(int ROWS, int COLUMNS, int STARTING_CELL_AMOUNT);
     Grid();
     ~Grid();
 

@@ -154,7 +154,7 @@ void Grid::updateGrid() {
 
 
 // With parameters
-Grid::Grid(int ROWS, int COLUMNS)
+Grid::Grid(int ROWS, int COLUMNS, int STARTING_CELL_AMOUNT)
 {
     // Grid setup
     rows = ROWS;
@@ -168,44 +168,29 @@ Grid::Grid(int ROWS, int COLUMNS)
     }
 
     // Initialize cells (randomly set them to alive or dead)
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            // Randomly set cells to alive or dead
-            if (rand() % 2 == 0) {
-                board[i][j].setAlive(true);
-            }
-            else {
-                board[i][j].setAlive(false);
-            }
-        }
-    }
+    randomiseAliveCells(STARTING_CELL_AMOUNT);
 }
 
 
 // Default with no parameters
-Grid::Grid() {
-    this->rows = 10;    // default number of rows
-    this->columns = 10; // default number of columns
+// Default constructor
+Grid::Grid()
+{
+    // Set default values for rows and columns if desired
+    rows = 10; // default number of rows
+    columns = 10; // default number of columns
 
-    // Allocate memory for the board
+    // Allocate memory for the grid
     board = new Cell * [rows];
-    for (int i = 0; i < rows; ++i) {
+    for (int i = 0; i < rows; i++)
+    {
         board[i] = new Cell[columns];
     }
 
-    // Initialize cells (randomly set them to alive or dead)
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < columns; j++) {
-            // Randomly set cells to alive (true) or dead (false)
-            if (rand() % 2 == 0) {
-                board[i][j].setAlive(true);  // Alive state
-            }
-            else {
-                board[i][j].setAlive(false);  // Dead state
-            }
-        }
-    }
+    // Optionally, you can call randomiseAliveCells with some default value here
+    randomiseAliveCells(10); // Example: starting with 10 alive cells
 }
+
 
 
 Grid::~Grid() 

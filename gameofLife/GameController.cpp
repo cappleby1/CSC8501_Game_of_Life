@@ -1,5 +1,6 @@
 #include "GameController.h"
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -17,13 +18,17 @@ void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOU
     cout << "Enter amount of turns: " << "\n";
     cin >> GAME_TIME;
 
-    board = new Grid(ROWS, COLUMNS);
+    board = new Grid(ROWS, COLUMNS, STARTING_CELL_AMOUNT);
     board->randomiseAliveCells(STARTING_CELL_AMOUNT);
     cout << "\n" << "Initial Board: " << "\n";
     board->printGrid();
 
     board->saveGameToCSV();
+    menu();
+}
 
+void GameController::menu()
+{
     int menu_option_2;
     cout << "What question would you like to run?" << ":\n";
     cin >> menu_option_2;
@@ -51,11 +56,10 @@ void GameController::question1(int GAME_TIME)
 {
     for (int i = 0; i < GAME_TIME; ++i)
     {
+        system("cls");
         cout << "\n Turn " << (i + 1) << ":\n";
         board->updateGrid();
         board->printGrid();
-
-        cout << "Checking if all cells are dead..." << endl;
 
         if (board->areAllCellsDead())
         {
