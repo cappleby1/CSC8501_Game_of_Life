@@ -32,26 +32,22 @@ void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOU
     {
         // Question 1
     case 1:
-        question1();
-        break;
+        question1(GAME_TIME);
 
         // Question 2
     case 2:
         question2();
-        break;
 
         // Question 3
     case 3:
         question3();
-        break;
         // Question 4
     case 4:
         question4();
-        break;
     }
 }
 
-void GameController::question1()
+void GameController::question1(int GAME_TIME)
 {
     for (int i = 0; i < GAME_TIME; ++i)
     {
@@ -59,18 +55,22 @@ void GameController::question1()
         board->updateGrid();
         board->printGrid();
 
-        int save_option;
-        cout << "Save board & pause? 1. Yes 2. No" << "\n";
-        cin >> save_option;
-        if (save_option == 1)
+        cout << "Checking if all cells are dead..." << endl;
+
+        if (board->areAllCellsDead())
         {
-            board->saveGameToCSV();
+            cout << "\n" << "All cells dead";
             break;
         }
-        else
-        {
-            continue;
-        }
+
+    }
+    int save_option;
+    cout << "\n Save board & pause? 1. Yes 2. No" << "\n";
+    cin >> save_option;
+    if (save_option == 1)
+    {
+        board->saveGameToCSV();
+        cout << "Game saved. Press any key to continue..." << endl;
     }
 
 }

@@ -17,7 +17,7 @@ public:
     void randomiseAliveCells(int STARTING_CELL_AMOUNT);
     void printGrid();
     void updateGrid();
-    int countAliveNeighbours();
+    int countAliveNeighbours(int i, int j);
     bool areAllCellsDead();
 
     bool checkForBlock();
