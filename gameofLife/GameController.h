@@ -17,7 +17,9 @@ public:
 
 	void createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOUNT, int GAME_TIME, int CURRENT_TURN);
 
-	void menu();
+	void menu(int GAME_TIME);
+
+	void saveController();
 
 	void question1(int GAME_TIME);
 	void question2();

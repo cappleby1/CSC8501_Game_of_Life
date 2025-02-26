@@ -24,10 +24,10 @@ void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOU
     board->printGrid();
 
     board->saveGameToCSV();
-    menu();
+    menu(GAME_TIME);
 }
 
-void GameController::menu()
+void GameController::menu(int GAME_TIME)
 {
     int menu_option_2;
     cout << "What question would you like to run?" << ":\n";
@@ -68,14 +68,7 @@ void GameController::question1(int GAME_TIME)
         }
 
     }
-    int save_option;
-    cout << "\n Save board & pause? 1. Yes 2. No" << "\n";
-    cin >> save_option;
-    if (save_option == 1)
-    {
-        board->saveGameToCSV();
-        cout << "Game saved. Press any key to continue..." << endl;
-    }
+	saveController();
 
 }
 
@@ -89,7 +82,7 @@ void GameController::question2()
         if (board->areAllCellsDead())
         {
             cout << "\n" << "All cells dead";
-            break;
+            saveController();
         }
 
         CURRENT_TURN += 1;
@@ -103,7 +96,7 @@ void GameController::question2()
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "2x2 found" << ":\n";
             board->printGrid();
-            break;
+            saveController();
         }
 
         if (board->checkForBeehive())
@@ -112,7 +105,7 @@ void GameController::question2()
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "beehive found" << ":\n";
             board->printGrid();
-            break;
+            saveController();
         }
     }
 }
@@ -127,7 +120,7 @@ void GameController::question3()
         if (board->areAllCellsDead())
         {
             cout << "\n" << "All cells dead";
-            break;
+            saveController();
         }
 
         CURRENT_TURN += 1;
@@ -141,7 +134,7 @@ void GameController::question3()
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "blinker found" << ":\n";
             board->printGrid();
-            break;
+            saveController();
         }
 
         if (board->checkForToad())
@@ -150,7 +143,7 @@ void GameController::question3()
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "toad found" << ":\n";
             board->printGrid();
-            break;
+            saveController();
         }
     }
 }
@@ -165,7 +158,7 @@ void GameController::question4()
         if (board->areAllCellsDead())
         {
             cout << "\n" << "All cells dead";
-            break;
+            saveController();
         }
 
         CURRENT_TURN += 1;
@@ -179,7 +172,7 @@ void GameController::question4()
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "glider found" << ":\n";
             board->printGrid();
-            break;
+            saveController();
         }
 
         if (board->checkForShip())
@@ -188,8 +181,20 @@ void GameController::question4()
             cout << "\n Turn " << CURRENT_TURN << ":\n";
             cout << "\n" << "ship found" << ":\n";
             board->printGrid();
-            break;
+            saveController();
         }
+    }
+}
+
+void GameController::saveController()
+{
+    int save_option;
+    cout << "\n Save board & pause? 1. Yes 2. No" << "\n";
+    cin >> save_option;
+    if (save_option == 1)
+    {
+        board->saveGameToCSV();
+        cout << "Game saved. Press any key to continue..." << endl;
     }
 }
 
