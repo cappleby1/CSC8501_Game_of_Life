@@ -9,23 +9,20 @@ public:
 	int CURRENT_TURN;
 	int ROWS;
 	int COLUMNS;
-	int GAME_TIME;
 	int STARTING_CELL_AMOUNT;
 
 	Grid* board;
 
-	GameController(int rows = 10, int columns = 10, int starting_cell = 10, int game_time = 0, int current_turn = 0);
+	GameController(int rows = 10, int columns = 10, int starting_cell = 10, int current_turn = 0);
 
-	void createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOUNT, int GAME_TIME, int CURRENT_TURN);
+	void createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOUNT, int CURRENT_TURN);
 
-	void menu(int GAME_TIME);
+	void menu();
 
 	void saveController();
 
-	void runForGameTime(int GAME_TIME);
+	void runForGameTime();
 	void checkForShape();
-
-	int setShape();
 };
 
 #endif

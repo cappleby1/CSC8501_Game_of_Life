@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOUNT, int GAME_TIME, int CURRENT_TURN)
+void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOUNT, int CURRENT_TURN)
 {
     cout << "Enter amount of rows: " << "\n";
     cin >> ROWS;
@@ -17,19 +17,16 @@ void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOU
     cout << "Enter amount of starting cells: " << "\n";
     cin >> STARTING_CELL_AMOUNT;
 
-    cout << "Enter amount of turns: " << "\n";
-    cin >> GAME_TIME;
-
     board = new Grid(ROWS, COLUMNS, STARTING_CELL_AMOUNT);
     board->randomiseAliveCells(STARTING_CELL_AMOUNT);
     cout << "\n" << "Initial Board: " << "\n";
     board->printGrid();
 
     board->saveGameToCSV();
-    menu(GAME_TIME);
+    menu();
 }
 
-void GameController::menu(int GAME_TIME)
+void GameController::menu()
 {
     int menu_option_2;
     cout << "What would you like to do? \n 1.Run for set amount of turns \n 2.Check for shape ";
@@ -38,16 +35,20 @@ void GameController::menu(int GAME_TIME)
     switch (menu_option_2)
     {
     case 1:
-        runForGameTime(GAME_TIME);
+        runForGameTime();
     case 2:
         checkForShape();
 
     }
 }
 
-void GameController::runForGameTime(int GAME_TIME)
+void GameController::runForGameTime()
 {
-    for (int i = 0; i < GAME_TIME; ++i)
+    int game_time;
+    cout << "\n Enter amount of turns: \n";
+    cin >> game_time;
+
+    for (int i = 0; i < game_time; ++i)
     {
         system("cls");
         cout << "\n Turn " << (i + 1) << ":\n";
@@ -135,7 +136,7 @@ void GameController::saveController()
 }
 
 
-GameController::GameController(int rows, int columns, int starting_cell, int game_time, int current_turn)
+GameController::GameController(int rows, int columns, int starting_cell, int current_turn)
 {
-    createNewGame(rows, columns, starting_cell, game_time, current_turn);
+    createNewGame(rows, columns, starting_cell, current_turn);
 }
