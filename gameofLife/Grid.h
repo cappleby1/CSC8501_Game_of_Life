@@ -1,5 +1,8 @@
+#ifndef GRID_H
+#define GRID_H
+
+#include <iostream>
 #include "Cell.h"
-using namespace std;
 
 class Grid {
 public:
@@ -8,6 +11,8 @@ public:
     int columns;
 
     Grid(int ROWS, int COLUMNS);
+    Grid();
+    ~Grid();
 
     void randomiseAliveCells(int STARTING_CELL_AMOUNT);
     void printGrid();
@@ -25,3 +30,5 @@ public:
     void saveGameToCSV();
     void loadGameFromCSV(int ROWS, Grid game_board);
 };
+
+#endif

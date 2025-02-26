@@ -10,7 +10,9 @@ int main()
 
     if (menu_option_1 == 1)
     {
-        Grid::loadGameFromCSV(ROWS, game_Board);
+        Grid game_board;
+        int ROWS = 10;
+        game_board.loadGameFromCSV(ROWS, game_board);
     }
 
     if (menu_option_1 == 2)

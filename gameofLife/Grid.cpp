@@ -146,6 +146,7 @@ void Grid::updateGrid() {
     delete[] newBoard;
 }
 
+// With parameters
 Grid::Grid(int ROWS, int COLUMNS)
 {
     // Grid setup
@@ -155,6 +156,16 @@ Grid::Grid(int ROWS, int COLUMNS)
     board = new Cell * [rows];
     for (int i = 0; i < rows; i++)
     {
+        board[i] = new Cell[columns];
+    }
+}
+
+// Default with no parameters
+Grid::Grid() {
+    this->rows = 10;    // default number of rows
+    this->columns = 10; // default number of columns
+    board = new Cell * [rows];
+    for (int i = 0; i < rows; ++i) {
         board[i] = new Cell[columns];
     }
 }

@@ -1,3 +1,6 @@
+#ifndef CELL_H 
+#define CELL_H 
+
 #include <iostream>
 
 using namespace std;
@@ -36,3 +39,5 @@ struct Pattern {
     int height;
     int aliveCells;
 };
+
+#endif

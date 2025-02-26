@@ -14,19 +14,6 @@ bool Cell::isAliveState()
     return is_alive;
 }
 
-bool Grid::areAllCellsDead(int rows, int columns)
-{
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
-            if (board[i][j].isAliveState()) {
-                // Found a live cell
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
 bool Grid::checkForBlock()
 {
     // Check for each possible 2x2 grid
