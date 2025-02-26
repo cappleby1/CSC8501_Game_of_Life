@@ -1,6 +1,8 @@
 #include "GameController.h"
 #include <iostream>
 #include <cstdlib>
+#include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -30,29 +32,20 @@ void GameController::createNewGame(int ROWS, int COLUMNS, int STARTING_CELL_AMOU
 void GameController::menu(int GAME_TIME)
 {
     int menu_option_2;
-    cout << "What would you like to do? \n 1.Run for set amount of turns \n 2.Check for block \n 3.Check for beehive \n 4.Check for blink \n 5.Check for toad \n 6.Check for glider \n 7.Check for ship \n ";
+    cout << "What would you like to do? \n 1.Run for set amount of turns \n 2.Check for shape ";
     cin >> menu_option_2;
 
     switch (menu_option_2)
     {
-        // Question 1
     case 1:
-        question1(GAME_TIME);
-
-        // Question 2
+        runForGameTime(GAME_TIME);
     case 2:
-        question2();
+        checkForShape();
 
-        // Question 3
-    case 3:
-        question3();
-        // Question 4
-    case 4:
-        question4();
     }
 }
 
-void GameController::question1(int GAME_TIME)
+void GameController::runForGameTime(int GAME_TIME)
 {
     for (int i = 0; i < GAME_TIME; ++i)
     {
@@ -72,123 +65,59 @@ void GameController::question1(int GAME_TIME)
 
 }
 
-void GameController::question2()
+void GameController::checkForShape()
 {
     bool found = false;
     CURRENT_TURN = 0;
+
+    string selectedShape;
+    std::cout << "Enter the shape you want to find (block, beehive, glider, etc.): ";
+    std::cin >> selectedShape;
+
+    transform(selectedShape.begin(), selectedShape.end(), selectedShape.begin(), ::tolower);
+
     while (!found)
     {
-
         if (board->areAllCellsDead())
         {
-            cout << "\n" << "All cells dead";
+            std::cout << "\n" << "All cells dead";
             saveController();
+            break;  
         }
 
         CURRENT_TURN += 1;
-        system("cls");
-        cout << "\n Turn " << CURRENT_TURN << ":\n";
+        system("cls");  
+        std::cout << "\n Turn " << CURRENT_TURN << ":\n";
         board->updateGrid();
         board->printGrid();
 
-        if (board->checkForBlock())
+        if (selectedShape == "block" && board->checkForBlock())
         {
             system("cls");
-            cout << "\n Turn " << CURRENT_TURN << ":\n";
-            cout << "\n" << "2x2 found" << ":\n";
+            std::cout << "\n Turn " << CURRENT_TURN << ":\n";
+            std::cout << "\n" << "2x2 Block found" << ":\n";
             board->printGrid();
             saveController();
+            found = true;  
         }
-
-        if (board->checkForBeehive())
+        else if (selectedShape == "beehive" && board->checkForBeehive())
         {
             system("cls");
-            cout << "\n Turn " << CURRENT_TURN << ":\n";
-            cout << "\n" << "beehive found" << ":\n";
+            std::cout << "\n Turn " << CURRENT_TURN << ":\n";
+            std::cout << "\n" << "Beehive found" << ":\n";
             board->printGrid();
             saveController();
+            found = true;  
         }
-    }
-}
-
-void GameController::question3()
-{
-    bool found = false;
-    CURRENT_TURN = 0;
-    while (!found)
-    {
-
-        if (board->areAllCellsDead())
+        
+        else if (selectedShape == "glider" && board->checkForGlider())  
         {
-            cout << "\n" << "All cells dead";
-            saveController();
-        }
-
-        CURRENT_TURN += 1;
-        system("cls");
-        cout << "\n Turn " << CURRENT_TURN << ":\n";
-        board->updateGrid();
-        board->printGrid();
-
-        if (board->checkForBlinker())
-        {
-            board->saveGameToCSV();
             system("cls");
-            cout << "\n Turn " << CURRENT_TURN << ":\n";
-            cout << "\n" << "blinker found" << ":\n";
+            std::cout << "\n Turn " << CURRENT_TURN << ":\n";
+            std::cout << "\n" << "Glider found" << ":\n";
             board->printGrid();
             saveController();
-        }
-
-        if (board->checkForToad())
-        {
-            board->saveGameToCSV();
-            system("cls");
-            cout << "\n Turn " << CURRENT_TURN << ":\n";
-            cout << "\n" << "toad found" << ":\n";
-            board->printGrid();
-            saveController();
-        }
-    }
-}
-
-void GameController::question4()
-{
-    bool found = false;
-    CURRENT_TURN = 0;
-    while (!found)
-    {
-
-        if (board->areAllCellsDead())
-        {
-            cout << "\n" << "All cells dead";
-            saveController();
-        }
-
-        CURRENT_TURN += 1;
-        system("cls");
-        cout << "\n Turn " << CURRENT_TURN << ":\n";
-        board->updateGrid();
-        board->printGrid();
-
-        if (board->checkForGlider())
-        {
-            board->saveGameToCSV();
-            system("cls");
-            cout << "\n Turn " << CURRENT_TURN << ":\n";
-            cout << "\n" << "glider found" << ":\n";
-            board->printGrid();
-            saveController();
-        }
-
-        if (board->checkForShip())
-        {
-            board->saveGameToCSV();
-            system("cls");
-            cout << "\n Turn " << CURRENT_TURN << ":\n";
-            cout << "\n" << "ship found" << ":\n";
-            board->printGrid();
-            saveController();
+            found = true; 
         }
     }
 }

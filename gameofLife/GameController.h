@@ -11,6 +11,7 @@ public:
 	int COLUMNS;
 	int GAME_TIME;
 	int STARTING_CELL_AMOUNT;
+
 	Grid* board;
 
 	GameController(int rows = 10, int columns = 10, int starting_cell = 10, int game_time = 0, int current_turn = 0);
@@ -21,10 +22,10 @@ public:
 
 	void saveController();
 
-	void question1(int GAME_TIME);
-	void question2();
-	void question3();
-	void question4();
+	void runForGameTime(int GAME_TIME);
+	void checkForShape();
+
+	int setShape();
 };
 
 #endif
